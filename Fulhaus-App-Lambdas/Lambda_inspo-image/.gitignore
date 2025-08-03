@@ -1,0 +1,11 @@
+# node module folder
+node_modules/
+
+# all env files
+.env
+env/
+/env
+env
+/dist
+dist
+accounts-server-tree

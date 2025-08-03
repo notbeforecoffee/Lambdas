@@ -1,0 +1,13 @@
+{
+  "name": "aws-vendor-data-processing",
+  "version": "2.0.0",
+  "description": "",
+  "main": "index.mjs",
+  "dependencies": {
+    "aws-sdk": "^2.1328.0",
+    "axios": "^1.4.0",
+    "csvtojson": "^2.0.10",
+    "mongoose": "^7.0.1",
+    "rsa-xml": "^0.1.5"
+  }
+}

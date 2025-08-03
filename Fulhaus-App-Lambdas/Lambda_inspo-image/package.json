@@ -1,0 +1,17 @@
+{
+  "name": "aws-lambda2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node -r './index.js'"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.1310.0",
+    "dotenv": "^16.0.3",
+    "file-type": "^16.5.3",
+    "validator": "^13.9.0"
+  }
+}
