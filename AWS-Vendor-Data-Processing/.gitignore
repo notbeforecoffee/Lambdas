@@ -1,2 +1,7 @@
 # Ignore generated files
 node_modules/
+
+# Ignore local configuration files
+.env
+*.env
+.env.*

@@ -1,4 +1,8 @@
+import dotenv from 'dotenv';
 import axios from "axios";
+
+dotenv.config();
+
 import { ProductModel } from "../models/models.mjs";
 const processRecordsInBatch = async (bulkRecords, errors) => {
   //process in batch size of 100
@@ -34,6 +38,12 @@ const sendProcessingStatsToSlack = async (
   totalRecords,
   errors
 ) => {
+  // Check if SLACK_WEBHOOK_URL is configured
+  if (!process.env.SLACK_WEBHOOK_URL) {
+    console.warn('SLACK_WEBHOOK_URL not configured, skipping Slack notification');
+    return;
+  }
+
   let message = `================================================================================\n${vendorName} - *${processor}* results\n*Total records:* ${totalRecords} \n*Success records:* ${
     totalRecords - errors.length
   } \n*Error records:* ${errors.length} \n*Error details:* \n`;
@@ -44,12 +54,17 @@ const sendProcessingStatsToSlack = async (
 
   message +=
     "================================================================================";
-  const response = await axios.post(
-    "https://hooks.slack.com/services/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",
-    { text: message },
-    { headers: { "Content-Type": "application/json" } }
-  );
-  console.log("slack response:", response.data);
+  
+  try {
+    const response = await axios.post(
+      process.env.SLACK_WEBHOOK_URL,
+      { text: message },
+      { headers: { "Content-Type": "application/json" } }
+    );
+    console.log("slack response:", response.data);
+  } catch (error) {
+    console.error('Failed to send Slack notification:', error.message);
+  }
 };
 
 export { processRecordsInBatch, sendProcessingStatsToSlack };
